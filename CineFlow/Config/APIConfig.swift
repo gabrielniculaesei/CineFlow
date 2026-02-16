@@ -2,7 +2,7 @@ import Foundation
 
 enum APIConfig {
     // MARK: - TMDB API Configuration
-    static let tmdbAPIKey = "YOUR_TMDB_API_KEY"
+    static let tmdbAPIKey = Secrets.tmdbAPIKey
     
     static let tmdbBaseURL = "https://api.themoviedb.org/3"
     static let tmdbImageBaseURL = "https://image.tmdb.org/t/p"

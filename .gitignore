@@ -1,6 +1,9 @@
 # Xcode
 build/
 DerivedData/
+
+# Secrets (API keys)
+**/Secrets.swift
 *.pbxuser
 !default.pbxuser
 *.mode1v3

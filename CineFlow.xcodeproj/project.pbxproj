@@ -29,6 +29,7 @@
 		B10000000000000000000014 /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000014 /* ChatView.swift */; };
 		B10000000000000000000015 /* WatchedMovieStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000015 /* WatchedMovieStore.swift */; };
 		B10000000000000000000016 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000016 /* ProfileView.swift */; };
+		B10000000000000000000017 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000017 /* Secrets.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +55,7 @@
 		A10000000000000000000014 /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
 		A10000000000000000000015 /* WatchedMovieStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchedMovieStore.swift; sourceTree = "<group>"; };
 		A10000000000000000000016 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		A10000000000000000000017 /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
 		D10000000000000000000006 /* CineFlow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CineFlow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -188,6 +190,7 @@
 			isa = PBXGroup;
 			children = (
 				A1000000000000000000000F /* APIConfig.swift */,
+				A10000000000000000000017 /* Secrets.swift */,
 			);
 			path = Config;
 			sourceTree = "<group>";
@@ -307,6 +310,7 @@
 				B10000000000000000000016 /* ProfileView.swift in Sources */,
 				B1000000000000000000000C /* MainTabView.swift in Sources */,
 				B1000000000000000000000D /* AppTheme.swift in Sources */,
+				B10000000000000000000017 /* Secrets.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
