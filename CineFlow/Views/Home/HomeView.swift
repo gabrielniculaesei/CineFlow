@@ -46,19 +46,19 @@ struct HomeView: View {
                             }
                             
                             if !topRatedMovies.isEmpty {
-                                movieSection(title: "⭐ Top Rated", movies: topRatedMovies)
+                                movieSection(title: "Top Rated", movies: topRatedMovies)
                             }
                             
                             if !popularMovies.isEmpty {
-                                movieSection(title: "📈 Popular This Month", movies: popularMovies)
+                                movieSection(title: "Popular This Month", movies: popularMovies)
                             }
                             
                             if !upcomingMovies.isEmpty {
-                                movieSection(title: "🍿 Coming Soon", movies: upcomingMovies)
+                                movieSection(title: "Coming Soon", movies: upcomingMovies)
                             }
                             
                             if !criticallyAcclaimed.isEmpty {
-                                movieSection(title: "🏆 Critically Acclaimed", movies: criticallyAcclaimed)
+                                movieSection(title: "Critically Acclaimed", movies: criticallyAcclaimed)
                             }
                             
                             // Per-genre sections for user's preferences
