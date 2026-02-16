@@ -8,17 +8,7 @@ CineFlow helps you find movies to watch. You get personalized suggestions based 
 
 ## Setup
 
-You'll need two things configured before running:
-
-**TMDB API key** - Get a free one at [themoviedb.org](https://www.themoviedb.org/settings/api). Then copy the example secrets file and paste your key:
-
-```
-cp CineFlow/Config/Secrets.example.swift CineFlow/Config/Secrets.swift
-```
-
-Open `Secrets.swift` and replace `YOUR_TMDB_API_KEY` with your actual key.
-
-**Ollama** - Install from [ollama.com](https://ollama.com), then pull the model:
+Install Ollama from [ollama.com](https://ollama.com), then pull the model:
 
 ```
 ollama pull llama3.2
