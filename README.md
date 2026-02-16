@@ -1,10 +1,19 @@
 # CineFlow
 
-A movie discovery app for iOS built with SwiftUI. It pulls data from TMDB, lets you browse and track movies, and includes a built-in AI chat assistant (CineBot) powered by a local Ollama instance - no cloud API keys needed for the chat.
+CineFlow is an iOS app that helps you figure out what to watch. It connects to TMDB to pull in real movie data - trending titles, top rated films, what's playing in theaters, and upcoming releases. You see everything organized on a home feed you can scroll through and tap into for details, ratings, and overviews.
 
-## What it does
+When you first open the app, it walks you through a short onboarding where you pick the genres and styles you're into. From there, the home screen tailors what it shows you based on those preferences. There's also a "What to Watch" section that narrows things down step by step if you're not sure what you're in the mood for.
 
-CineFlow helps you find movies to watch. You get personalized suggestions based on genres you pick during onboarding, you can browse trending and popular titles, and if you're stuck you can just ask CineBot for a recommendation. It runs Ollama locally on your Mac so the chat works offline and stays private.
+The app keeps track of movies you've watched. You can rate them, mark whether you liked them or loved them, and see your stats on your profile - how many you've seen, your average rating, that kind of thing.
+
+There's a built-in chat assistant called CineBot that runs on Ollama locally. You can ask it for recommendations, compare movies, or just talk about films. It runs entirely on your machine, no cloud APIs involved for the chat side.
+
+<p align="center">
+  <img src="screenshots/home.png" width="230" />
+  <img src="screenshots/what-to-watch.png" width="230" />
+  <img src="screenshots/profile.png" width="230" />
+  <img src="screenshots/cinebot.png" width="230" />
+</p>
 
 ## Setup
 
