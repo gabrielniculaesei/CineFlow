@@ -1,0 +1,517 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		B10000000000000000000001 /* CineFlowApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000001 /* CineFlowApp.swift */; };
+		B10000000000000000000002 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000002 /* Movie.swift */; };
+		B10000000000000000000003 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000003 /* UserProfile.swift */; };
+		B10000000000000000000004 /* Genre.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000004 /* Genre.swift */; };
+		B10000000000000000000005 /* MovieDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000005 /* MovieDatabase.swift */; };
+		B10000000000000000000006 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000006 /* OnboardingView.swift */; };
+		B10000000000000000000007 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000007 /* HomeView.swift */; };
+		B10000000000000000000008 /* WhatToWatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000008 /* WhatToWatchView.swift */; };
+		B10000000000000000000009 /* MoviesLikeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000009 /* MoviesLikeView.swift */; };
+		B1000000000000000000000A /* MovieDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000000000000000000000A /* MovieDetailView.swift */; };
+		B1000000000000000000000B /* MovieCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000000000000000000000B /* MovieCardView.swift */; };
+		B1000000000000000000000C /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000000000000000000000C /* MainTabView.swift */; };
+		B1000000000000000000000D /* AppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000000000000000000000D /* AppTheme.swift */; };
+		B1000000000000000000000E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1000000000000000000000E /* Assets.xcassets */; };
+		B1000000000000000000000F /* APIConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000000000000000000000F /* APIConfig.swift */; };
+		B10000000000000000000010 /* TMDBModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000010 /* TMDBModels.swift */; };
+		B10000000000000000000011 /* TMDBService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000011 /* TMDBService.swift */; };
+		B10000000000000000000012 /* PosterImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000012 /* PosterImageView.swift */; };
+		B10000000000000000000013 /* GeminiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000013 /* GeminiService.swift */; };
+		B10000000000000000000014 /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000014 /* ChatView.swift */; };
+		B10000000000000000000015 /* WatchedMovieStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000015 /* WatchedMovieStore.swift */; };
+		B10000000000000000000016 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000016 /* ProfileView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		A10000000000000000000001 /* CineFlowApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CineFlowApp.swift; sourceTree = "<group>"; };
+		A10000000000000000000002 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
+		A10000000000000000000003 /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
+		A10000000000000000000004 /* Genre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genre.swift; sourceTree = "<group>"; };
+		A10000000000000000000005 /* MovieDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDatabase.swift; sourceTree = "<group>"; };
+		A10000000000000000000006 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		A10000000000000000000007 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		A10000000000000000000008 /* WhatToWatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatToWatchView.swift; sourceTree = "<group>"; };
+		A10000000000000000000009 /* MoviesLikeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesLikeView.swift; sourceTree = "<group>"; };
+		A1000000000000000000000A /* MovieDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailView.swift; sourceTree = "<group>"; };
+		A1000000000000000000000B /* MovieCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCardView.swift; sourceTree = "<group>"; };
+		A1000000000000000000000C /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
+		A1000000000000000000000D /* AppTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTheme.swift; sourceTree = "<group>"; };
+		A1000000000000000000000E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A1000000000000000000000F /* APIConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConfig.swift; sourceTree = "<group>"; };
+		A10000000000000000000010 /* TMDBModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMDBModels.swift; sourceTree = "<group>"; };
+		A10000000000000000000011 /* TMDBService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMDBService.swift; sourceTree = "<group>"; };
+		A10000000000000000000012 /* PosterImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PosterImageView.swift; sourceTree = "<group>"; };
+		A10000000000000000000013 /* GeminiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeminiService.swift; sourceTree = "<group>"; };
+		A10000000000000000000014 /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
+		A10000000000000000000015 /* WatchedMovieStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchedMovieStore.swift; sourceTree = "<group>"; };
+		A10000000000000000000016 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		D10000000000000000000006 /* CineFlow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CineFlow.app; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D10000000000000000000005 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		C10000000000000000000001 /* CineFlow */ = {
+			isa = PBXGroup;
+			children = (
+				A10000000000000000000001 /* CineFlowApp.swift */,
+				C10000000000000000000002 /* Models */,
+				C10000000000000000000003 /* Data */,
+				C1000000000000000000000D /* Config */,
+				C1000000000000000000000E /* Services */,
+				C10000000000000000000004 /* Views */,
+				C1000000000000000000000A /* Theme */,
+				A1000000000000000000000E /* Assets.xcassets */,
+			);
+			path = CineFlow;
+			sourceTree = "<group>";
+		};
+		C10000000000000000000002 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				A10000000000000000000002 /* Movie.swift */,
+				A10000000000000000000003 /* UserProfile.swift */,
+				A10000000000000000000004 /* Genre.swift */,
+				A10000000000000000000010 /* TMDBModels.swift */,
+				A10000000000000000000015 /* WatchedMovieStore.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		C10000000000000000000003 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				A10000000000000000000005 /* MovieDatabase.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		C10000000000000000000004 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A1000000000000000000000C /* MainTabView.swift */,
+				C10000000000000000000005 /* Onboarding */,
+				C10000000000000000000006 /* Home */,
+				C10000000000000000000007 /* WhatToWatch */,
+				C10000000000000000000008 /* MoviesLike */,
+				C1000000000000000000000F /* Chat */,
+				C10000000000000000000010 /* Profile */,
+				C10000000000000000000009 /* Components */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		C10000000000000000000005 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				A10000000000000000000006 /* OnboardingView.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		C10000000000000000000006 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				A10000000000000000000007 /* HomeView.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		C10000000000000000000007 /* WhatToWatch */ = {
+			isa = PBXGroup;
+			children = (
+				A10000000000000000000008 /* WhatToWatchView.swift */,
+			);
+			path = WhatToWatch;
+			sourceTree = "<group>";
+		};
+		C10000000000000000000008 /* MoviesLike */ = {
+			isa = PBXGroup;
+			children = (
+				A10000000000000000000009 /* MoviesLikeView.swift */,
+			);
+			path = MoviesLike;
+			sourceTree = "<group>";
+		};
+		C10000000000000000000009 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				A1000000000000000000000A /* MovieDetailView.swift */,
+				A1000000000000000000000B /* MovieCardView.swift */,
+				A10000000000000000000012 /* PosterImageView.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		C1000000000000000000000A /* Theme */ = {
+			isa = PBXGroup;
+			children = (
+				A1000000000000000000000D /* AppTheme.swift */,
+			);
+			path = Theme;
+			sourceTree = "<group>";
+		};
+		C1000000000000000000000B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D10000000000000000000006 /* CineFlow.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C1000000000000000000000C = {
+			isa = PBXGroup;
+			children = (
+				C10000000000000000000001 /* CineFlow */,
+				C1000000000000000000000B /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		C1000000000000000000000D /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				A1000000000000000000000F /* APIConfig.swift */,
+			);
+			path = Config;
+			sourceTree = "<group>";
+		};
+		C1000000000000000000000E /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				A10000000000000000000011 /* TMDBService.swift */,
+				A10000000000000000000013 /* GeminiService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		C1000000000000000000000F /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				A10000000000000000000014 /* ChatView.swift */,
+			);
+			path = Chat;
+			sourceTree = "<group>";
+		};
+		C10000000000000000000010 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				A10000000000000000000016 /* ProfileView.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D10000000000000000000001 /* CineFlow */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D10000000000000000000009 /* Build configuration list for PBXNativeTarget "CineFlow" */;
+			buildPhases = (
+				D10000000000000000000003 /* Sources */,
+				D10000000000000000000005 /* Frameworks */,
+				D10000000000000000000004 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CineFlow;
+			productName = CineFlow;
+			productReference = D10000000000000000000006 /* CineFlow.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D10000000000000000000002 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 2620;
+				TargetAttributes = {
+					D10000000000000000000001 = {
+						CreatedOnToolsVersion = 15.0;
+					};
+				};
+			};
+			buildConfigurationList = D1000000000000000000000A /* Build configuration list for PBXProject "CineFlow" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = C1000000000000000000000C;
+			productRefGroup = C1000000000000000000000B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D10000000000000000000001 /* CineFlow */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D10000000000000000000004 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B1000000000000000000000E /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D10000000000000000000003 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B10000000000000000000001 /* CineFlowApp.swift in Sources */,
+				B10000000000000000000002 /* Movie.swift in Sources */,
+				B10000000000000000000003 /* UserProfile.swift in Sources */,
+				B10000000000000000000004 /* Genre.swift in Sources */,
+				B10000000000000000000010 /* TMDBModels.swift in Sources */,
+				B10000000000000000000005 /* MovieDatabase.swift in Sources */,
+				B1000000000000000000000F /* APIConfig.swift in Sources */,
+				B10000000000000000000011 /* TMDBService.swift in Sources */,
+				B10000000000000000000006 /* OnboardingView.swift in Sources */,
+				B10000000000000000000007 /* HomeView.swift in Sources */,
+				B10000000000000000000008 /* WhatToWatchView.swift in Sources */,
+				B10000000000000000000009 /* MoviesLikeView.swift in Sources */,
+				B1000000000000000000000A /* MovieDetailView.swift in Sources */,
+				B1000000000000000000000B /* MovieCardView.swift in Sources */,
+				B10000000000000000000012 /* PosterImageView.swift in Sources */,
+				B10000000000000000000013 /* GeminiService.swift in Sources */,
+				B10000000000000000000014 /* ChatView.swift in Sources */,
+				B10000000000000000000015 /* WatchedMovieStore.swift in Sources */,
+				B10000000000000000000016 /* ProfileView.swift in Sources */,
+				B1000000000000000000000C /* MainTabView.swift in Sources */,
+				B1000000000000000000000D /* AppTheme.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		D10000000000000000000007 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = RG57Z5P265;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = CineFlow;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cineflow.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		D10000000000000000000008 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = RG57Z5P265;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = CineFlow;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cineflow.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		D1000000000000000000000B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		D1000000000000000000000C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D10000000000000000000009 /* Build configuration list for PBXNativeTarget "CineFlow" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D10000000000000000000007 /* Debug */,
+				D10000000000000000000008 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D1000000000000000000000A /* Build configuration list for PBXProject "CineFlow" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D1000000000000000000000B /* Debug */,
+				D1000000000000000000000C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D10000000000000000000002 /* Project object */;
+}
