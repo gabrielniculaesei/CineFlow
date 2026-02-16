@@ -38,11 +38,11 @@ struct HomeView: View {
                             headerSection
                             
                             if !trendingMovies.isEmpty {
-                                movieSection(title: "🔥 Trending This Week", movies: trendingMovies)
+                                movieSection(title: "Trending This Week", movies: trendingMovies)
                             }
                             
                             if !nowPlayingMovies.isEmpty {
-                                movieSection(title: "🎬 Now Playing", movies: nowPlayingMovies)
+                                movieSection(title: " Now Playing", movies: nowPlayingMovies)
                             }
                             
                             if !topRatedMovies.isEmpty {
