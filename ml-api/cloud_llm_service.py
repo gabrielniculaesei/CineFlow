@@ -58,13 +58,13 @@ class HuggingFaceLLM(BaseLLM):
     Uses the novita provider through HuggingFace router for free inference.
     
     Recommended models:
-    - meta-llama/llama-3.1-8b-instruct (8B, good quality, free)
-    - meta-llama/llama-3.2-3b-instruct (3B, fast, free)
+    - meta-llama/Llama-3.1-8B-Instruct (8B, good quality)
+    - Qwen/Qwen2.5-7B-Instruct (fast and reliable)
     """
     
     def __init__(
         self,
-        model: str = "meta-llama/llama-3.1-8b-instruct",
+        model: str = "meta-llama/Llama-3.1-8B-Instruct",
         api_token: Optional[str] = None,
         endpoint_url: Optional[str] = None,
     ):
@@ -75,8 +75,8 @@ class HuggingFaceLLM(BaseLLM):
         if endpoint_url:
             self.api_url = endpoint_url
         else:
-            # Use HuggingFace router with novita provider (OpenAI-compatible)
-            self.api_url = "https://router.huggingface.co/novita/v3/openai/chat/completions"
+            # Hugging Face now routes chat completions through the router endpoint.
+            self.api_url = "https://router.huggingface.co/v1/chat/completions"
     
     async def check_availability(self) -> bool:
         """Check if the model is available."""
@@ -453,7 +453,7 @@ def create_llm(
     provider = provider or os.getenv("LLM_PROVIDER", "huggingface")
     
     if provider == "huggingface":
-        model = model or os.getenv("LLM_MODEL", "microsoft/Phi-3-mini-4k-instruct")
+        model = model or os.getenv("LLM_MODEL", "meta-llama/Llama-3.1-8B-Instruct")
         return HuggingFaceLLM(model=model, **kwargs)
     
     elif provider == "replicate":

@@ -30,6 +30,7 @@
 		B10000000000000000000015 /* WatchedMovieStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000015 /* WatchedMovieStore.swift */; };
 		B10000000000000000000016 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000016 /* ProfileView.swift */; };
 		B10000000000000000000017 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000017 /* Secrets.swift */; };
+		B10000000000000000000018 /* RecommendationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000018 /* RecommendationService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +57,7 @@
 		A10000000000000000000015 /* WatchedMovieStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchedMovieStore.swift; sourceTree = "<group>"; };
 		A10000000000000000000016 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		A10000000000000000000017 /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
+		A10000000000000000000018 /* RecommendationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationService.swift; sourceTree = "<group>"; };
 		D10000000000000000000006 /* CineFlow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CineFlow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -200,6 +202,7 @@
 			children = (
 				A10000000000000000000011 /* TMDBService.swift */,
 				A10000000000000000000013 /* GeminiService.swift */,
+				A10000000000000000000018 /* RecommendationService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -305,6 +308,7 @@
 				B1000000000000000000000B /* MovieCardView.swift in Sources */,
 				B10000000000000000000012 /* PosterImageView.swift in Sources */,
 				B10000000000000000000013 /* GeminiService.swift in Sources */,
+				B10000000000000000000018 /* RecommendationService.swift in Sources */,
 				B10000000000000000000014 /* ChatView.swift in Sources */,
 				B10000000000000000000015 /* WatchedMovieStore.swift in Sources */,
 				B10000000000000000000016 /* ProfileView.swift in Sources */,

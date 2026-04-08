@@ -125,7 +125,7 @@ struct ChatView: View {
     }
     
     // MARK: - Message Bubble
-    private func messageBubble(_ message: OllamaService.ChatMessage) -> some View {
+    private func messageBubble(_ message: ChatService.ChatMessage) -> some View {
         HStack {
             if message.role == .user { Spacer(minLength: 50) }
             
