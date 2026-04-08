@@ -37,3 +37,24 @@ Pods/
 # Misc
 *.swp
 *~
+
+# Python
+ml-api/venv/
+ml-api/__pycache__/
+ml-api/*.pyc
+ml-api/.env
+*.egg-info/
+dist/
+build/
+
+# ML models and data (too large for git)
+ml-api/data/
+ml-api/models/
+*.pkl
+*.joblib
+*.h5
+*.pt
+*.pth
+
+# Jupyter notebooks checkpoints
+.ipynb_checkpoints/

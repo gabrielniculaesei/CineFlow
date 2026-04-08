@@ -11,6 +11,9 @@ enum APIConfig {
         !tmdbAPIKey.isEmpty && tmdbAPIKey != "YOUR_API_KEY_HERE"
     }
     
+    // MARK: - ML Recommendation API (Local)
+    static let mlAPIBaseURL = "http://localhost:8000"
+    
     // MARK: - Ollama Configuration (Local)
     static let ollamaBaseURL = "http://localhost:11434"
     static let ollamaModel = "llama3.2"

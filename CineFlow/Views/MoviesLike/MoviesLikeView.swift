@@ -200,6 +200,22 @@ struct MoviesLikeView: View {
         guard let tmdbId = movie.tmdbId else { return }
         isLoadingSimilar = true
         Task {
+            // Try ML Recommendation API first, fall back to TMDB
+            do {
+                let movies = try await RecommendationService.shared.fetchRecommendations(movieId: tmdbId)
+                if !movies.isEmpty {
+                    await MainActor.run {
+                        similarMovies = movies
+                        isLoadingSimilar = false
+                    }
+                    return
+                }
+            } catch {
+                // ML API unavailable — fall through to TMDB
+                print("ML API unavailable, falling back to TMDB: \(error.localizedDescription)")
+            }
+            
+            // Fallback: TMDB similar movies
             do {
                 let movies = try await TMDBService.shared.fetchSimilar(movieId: tmdbId)
                 await MainActor.run {
