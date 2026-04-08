@@ -1,17 +1,16 @@
 """
-Cloud LLM Service - Supports multiple providers for online deployment.
+Cloud LLM Service - Supports multiple providers for deployment.
 
 Supported providers:
     1. Hugging Face Inference API (recommended for fine-tuned models)
     2. Replicate (easy deployment)
     3. OpenAI-compatible APIs (OpenAI, Together AI, Groq, etc.)
-    4. Ollama (local development only)
 
 Environment variables:
     HF_API_TOKEN        - Hugging Face API token
     REPLICATE_API_TOKEN - Replicate API token
     OPENAI_API_KEY      - OpenAI API key
-    LLM_PROVIDER        - Which provider to use (huggingface, replicate, openai, ollama)
+    LLM_PROVIDER        - Which provider to use (huggingface, replicate, openai)
     LLM_MODEL           - Model name/ID for the provider
 """
 
@@ -54,28 +53,18 @@ class BaseLLM(ABC):
 
 class HuggingFaceLLM(BaseLLM):
     """
-    Hugging Face Inference API client.
+    Hugging Face Router API client (OpenAI-compatible).
     
-    Free tier includes:
-    - Rate-limited access to many models
-    - 1000 requests/day for Inference API
+    Uses the novita provider through HuggingFace router for free inference.
     
-    For production, use Inference Endpoints ($0.06/hr for small models).
-    
-    Recommended models for movie chatbot:
-    - microsoft/Phi-3-mini-4k-instruct (3.8B, fast, good quality)
-    - google/gemma-2b-it (2B, very fast)
-    - mistralai/Mistral-7B-Instruct-v0.2 (7B, high quality)
-    - meta-llama/Llama-2-7b-chat-hf (7B, requires approval)
-    
-    For fine-tuned models:
-    - Upload your model to HF Hub
-    - Use your model ID: "your-username/your-model-name"
+    Recommended models:
+    - meta-llama/llama-3.1-8b-instruct (8B, good quality, free)
+    - meta-llama/llama-3.2-3b-instruct (3B, fast, free)
     """
     
     def __init__(
         self,
-        model: str = "microsoft/Phi-3-mini-4k-instruct",
+        model: str = "meta-llama/llama-3.1-8b-instruct",
         api_token: Optional[str] = None,
         endpoint_url: Optional[str] = None,
     ):
@@ -86,29 +75,34 @@ class HuggingFaceLLM(BaseLLM):
         if endpoint_url:
             self.api_url = endpoint_url
         else:
-            self.api_url = f"https://api-inference.huggingface.co/models/{model}"
+            # Use HuggingFace router with novita provider (OpenAI-compatible)
+            self.api_url = "https://router.huggingface.co/novita/v3/openai/chat/completions"
     
     async def check_availability(self) -> bool:
-        """Check if the model is available on Hugging Face."""
+        """Check if the model is available."""
         if not self.api_token:
             print("HF_API_TOKEN not set. Get one at: https://huggingface.co/settings/tokens")
             self.is_available = False
             return False
         
         try:
-            headers = {"Authorization": f"Bearer {self.api_token}"}
-            async with httpx.AsyncClient(timeout=10.0) as client:
+            headers = {
+                "Authorization": f"Bearer {self.api_token}",
+                "Content-Type": "application/json",
+            }
+            payload = {
+                "model": self.model,
+                "messages": [{"role": "user", "content": "Hi"}],
+                "max_tokens": 5,
+            }
+            async with httpx.AsyncClient(timeout=15.0) as client:
                 response = await client.post(
                     self.api_url,
                     headers=headers,
-                    json={"inputs": "Hello", "parameters": {"max_new_tokens": 5}},
+                    json=payload,
                 )
                 
                 if response.status_code == 200:
-                    self.is_available = True
-                    return True
-                elif response.status_code == 503:
-                    print(f"Model {self.model} is loading (cold start)...")
                     self.is_available = True
                     return True
                 elif response.status_code == 401:
@@ -132,24 +126,24 @@ class HuggingFaceLLM(BaseLLM):
         temperature: float = 0.7,
         max_tokens: Optional[int] = 256,
     ) -> str:
-        """Generate response using Hugging Face Inference API."""
+        """Generate response using HuggingFace Router (OpenAI-compatible)."""
         if not self.api_token:
             raise RuntimeError("HF_API_TOKEN not configured")
         
+        messages = []
         if system_prompt:
-            full_prompt = f"<|system|>\n{system_prompt}<|end|>\n<|user|>\n{prompt}<|end|>\n<|assistant|>\n"
-        else:
-            full_prompt = f"<|user|>\n{prompt}<|end|>\n<|assistant|>\n"
+            messages.append({"role": "system", "content": system_prompt})
+        messages.append({"role": "user", "content": prompt})
         
-        headers = {"Authorization": f"Bearer {self.api_token}"}
+        headers = {
+            "Authorization": f"Bearer {self.api_token}",
+            "Content-Type": "application/json",
+        }
         payload = {
-            "inputs": full_prompt,
-            "parameters": {
-                "max_new_tokens": max_tokens or 256,
-                "temperature": temperature,
-                "return_full_text": False,
-                "do_sample": True,
-            },
+            "model": self.model,
+            "messages": messages,
+            "temperature": temperature,
+            "max_tokens": max_tokens or 256,
         }
         
         async with httpx.AsyncClient(timeout=60.0) as client:
@@ -159,17 +153,9 @@ class HuggingFaceLLM(BaseLLM):
                 json=payload,
             )
             
-            if response.status_code == 503:
-                error_data = response.json()
-                estimated_time = error_data.get("estimated_time", 20)
-                raise RuntimeError(f"Model loading, retry in {estimated_time}s")
-            
             response.raise_for_status()
             result = response.json()
-            
-            if isinstance(result, list) and len(result) > 0:
-                return result[0].get("generated_text", "").strip()
-            return ""
+            return result["choices"][0]["message"]["content"].strip()
     
     async def generate_stream(
         self,
@@ -177,14 +163,46 @@ class HuggingFaceLLM(BaseLLM):
         system_prompt: Optional[str] = None,
         temperature: float = 0.7,
     ) -> AsyncGenerator[str, None]:
-        """Stream response (requires Inference Endpoints for true streaming)."""
-        response = await self.generate(prompt, system_prompt, temperature)
+        """Stream response."""
+        if not self.api_token:
+            raise RuntimeError("HF_API_TOKEN not configured")
         
-        words = response.split()
-        for i, word in enumerate(words):
-            if i > 0:
-                yield " "
-            yield word
+        messages = []
+        if system_prompt:
+            messages.append({"role": "system", "content": system_prompt})
+        messages.append({"role": "user", "content": prompt})
+        
+        headers = {
+            "Authorization": f"Bearer {self.api_token}",
+            "Content-Type": "application/json",
+        }
+        payload = {
+            "model": self.model,
+            "messages": messages,
+            "temperature": temperature,
+            "stream": True,
+        }
+        
+        async with httpx.AsyncClient(timeout=120.0) as client:
+            async with client.stream(
+                "POST",
+                self.api_url,
+                headers=headers,
+                json=payload,
+            ) as response:
+                response.raise_for_status()
+                async for line in response.aiter_lines():
+                    if line.startswith("data: "):
+                        data = line[6:]
+                        if data == "[DONE]":
+                            break
+                        try:
+                            chunk = json.loads(data)
+                            content = chunk["choices"][0]["delta"].get("content", "")
+                            if content:
+                                yield content
+                        except json.JSONDecodeError:
+                            continue
 
 
 class ReplicateLLM(BaseLLM):
@@ -429,7 +447,7 @@ def create_llm(
     Factory function to create the appropriate LLM client.
     
     Uses environment variables if not specified:
-        LLM_PROVIDER: huggingface, replicate, openai, ollama
+        LLM_PROVIDER: huggingface, replicate, openai
         LLM_MODEL: Model name/ID
     """
     provider = provider or os.getenv("LLM_PROVIDER", "huggingface")
@@ -446,13 +464,8 @@ def create_llm(
         model = model or os.getenv("LLM_MODEL", "gpt-3.5-turbo")
         return OpenAICompatibleLLM(model=model, **kwargs)
     
-    elif provider == "ollama":
-        from llm_service import OllamaLLM
-        model = model or os.getenv("LLM_MODEL", "llama3.2:3b")
-        return OllamaLLM(model=model)
-    
     else:
-        raise ValueError(f"Unknown LLM provider: {provider}")
+        raise ValueError(f"Unknown LLM provider: {provider}. Supported: huggingface, replicate, openai")
 
 
 class CloudMovieChatbot:

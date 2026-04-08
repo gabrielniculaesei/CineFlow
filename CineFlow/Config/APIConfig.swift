@@ -11,12 +11,10 @@ enum APIConfig {
         !tmdbAPIKey.isEmpty && tmdbAPIKey != "YOUR_API_KEY_HERE"
     }
     
-    // MARK: - ML Recommendation API (Local)
+    // MARK: - ML API Configuration (Backend)
+    // For local development: http://localhost:8000
+    // For production: https://your-app.onrender.com
     static let mlAPIBaseURL = "http://localhost:8000"
-    
-    // MARK: - Ollama Configuration (Local)
-    static let ollamaBaseURL = "http://localhost:11434"
-    static let ollamaModel = "llama3.2"
     
     // Image sizes
     enum PosterSize: String {

@@ -6,7 +6,7 @@ When you first open the app, it walks you through a short onboarding where you p
 
 The app keeps track of movies you have watched. You can rate them, mark whether you liked them or loved them, and see your stats on your profile: how many you have seen, your average rating, that kind of thing.
 
-There is a built-in chat assistant called CineBot that runs on Ollama locally. You can ask it for recommendations, compare movies, or just talk about films. It runs entirely on your machine, no cloud APIs involved for the chat side.
+There is a built-in chat assistant called CineBot powered by a fine-tuned LLM on Hugging Face. You can ask it for recommendations, compare movies, or just talk about films.
 
 <p align="center">
   <img src="screenshots/home.png" width="230" />
@@ -22,15 +22,14 @@ CineFlow/
 ├── CineFlow/                    # iOS App (SwiftUI)
 │   ├── Config/                  # API configuration
 │   ├── Models/                  # Data models
-│   ├── Services/                # API services (TMDB, Recommendations)
+│   ├── Services/                # API services (TMDB, Chat, Recommendations)
 │   ├── Views/                   # UI components
 │   └── Theme/                   # Styling
 │
 └── ml-api/                      # Python Backend (FastAPI)
     ├── main.py                  # API server
     ├── recommender.py           # ML recommendation engine
-    ├── llm_service.py           # Local LLM integration (Ollama)
-    ├── cloud_llm_service.py     # Cloud LLM providers
+    ├── cloud_llm_service.py     # LLM providers (Hugging Face, etc.)
     └── finetune/                # Model fine-tuning scripts
 ```
 
@@ -49,15 +48,15 @@ iOS App                          Backend (ml-api)               External Service
                     ┌────────────────────┼────────────────────┐       │
                     │                    │                    │       │
               ┌─────▼─────┐       ┌──────▼──────┐      ┌──────▼───────┐
-              │Recommender│       │ Ollama LLM  │      │ Cloud LLM    │
-              │ (ML Model)│       │ (local)     │      │ (HuggingFace)│
+              │Recommender│       │ Hugging Face│      │ Cloud LLM    │
+              │ (ML Model)│       │ Inference   │      │ (HF/OpenAI)  │
               └───────────┘       └─────────────┘      └──────────────┘
 ```
 
 Data flow:
 - Movie browsing: iOS App talks directly to TMDB API
 - Recommendations: iOS App calls /recommend on the Python backend
-- Chat: iOS App calls /chat, backend forwards to Ollama or cloud LLM
+- Chat: iOS App calls /chat, backend forwards to Hugging Face
 
 ## iOS App Setup
 
@@ -65,7 +64,7 @@ Data flow:
 2. Add your TMDB API key to `Config/Secrets.swift`
 3. Pick a simulator and hit Run
 
-The chat feature works best on Simulator since it can reach localhost on your Mac. For a physical device you need to point the Ollama URL to your Mac's local IP.
+The chat feature requires the backend to be running. For Simulator, `localhost` works. For a physical device, update `mlAPIBaseURL` in `APIConfig.swift` to your Mac's local IP or deployed URL.
 
 ## Backend Setup (ml-api)
 
@@ -79,29 +78,26 @@ source venv/bin/activate
 # Install dependencies
 pip install -r requirements.txt
 
+# Set up environment
+cp .env.example .env
+# Edit .env and add:
+#   LLM_PROVIDER=huggingface
+#   LLM_MODEL=gabrielniculaesei/cinebot-movie-expert  (or your model)
+#   HF_API_TOKEN=your_huggingface_token
+
 # Start the server
 uvicorn main:app --reload --port 8000
 ```
 
 API docs available at http://localhost:8000/docs
 
-### Local LLM Setup (Ollama)
-
-Install Ollama from [ollama.com](https://ollama.com), then pull a model:
-
-```bash
-ollama pull llama3.2:3b
-```
-
-Make sure Ollama is running before you use CineBot. If you want a different model, change `ollamaModel` in `APIConfig.swift` and `LLM_MODEL` in your .env file.
-
 ### Cloud Deployment
 
-For production, you can deploy the backend to Render or Railway:
+For production, deploy the backend to Render or Railway:
 
 1. Set environment variables:
    - `LLM_PROVIDER=huggingface`
-   - `LLM_MODEL=microsoft/Phi-3-mini-4k-instruct`
+   - `LLM_MODEL=gabrielniculaesei/cinebot-movie-expert`
    - `HF_API_TOKEN=your_token`
 
 2. Deploy from GitHub (see render.yaml for configuration)
@@ -120,7 +116,7 @@ For production, you can deploy the backend to Render or Railway:
 
 ## ML Components
 
-The backend has two ML features that need training:
+The backend has two ML features:
 
 ### 1. Movie Recommendations
 
@@ -129,7 +125,7 @@ The recommender in `recommender.py` currently uses placeholder data. To train a 
 - Train a content-based or collaborative filtering model
 - Replace the placeholder logic in `load_model()` and `predict()`
 
-### 2. Fine-tuned Chat Model (Optional)
+### 2. Fine-tuned Chat Model
 
 The `finetune/` folder contains scripts to train a movie-focused chatbot:
 - Use Google Colab notebook (free GPU)
@@ -141,4 +137,4 @@ The `finetune/` folder contains scripts to train a movie-focused chatbot:
 - SwiftUI (iOS)
 - FastAPI (Backend)
 - TMDB API (Movie data)
-- Ollama / Hugging Face (LLM)
+- Hugging Face (LLM)

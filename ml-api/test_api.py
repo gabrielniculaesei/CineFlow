@@ -73,7 +73,7 @@ async def test_health() -> bool:
                 print_test("Health Check", "PASS", status_msg)
                 
                 if not data['llm_available']:
-                    print_test("LLM Service", "WARN", "Ollama not available. Install with: brew install ollama && ollama pull llama3.2:3b")
+                    print_test("LLM Service", "WARN", "LLM not available. Check your HF_API_TOKEN is set correctly.")
                 else:
                     print_test("LLM Service", "PASS", f"Model: {data.get('llm_model', 'unknown')}")
                 
@@ -349,8 +349,8 @@ async def main():
         print(f"\n{Colors.WARNING}Some tests failed or were skipped{Colors.ENDC}")
         if not llm_available:
             print(f"\n{Colors.OKCYAN}To enable LLM features:{Colors.ENDC}")
-            print(f"  brew install ollama")
-            print(f"  ollama pull llama3.2:3b")
+            print(f"  Set HF_API_TOKEN in your .env file")
+            print(f"  Get a token at: https://huggingface.co/settings/tokens")
 
 
 if __name__ == "__main__":

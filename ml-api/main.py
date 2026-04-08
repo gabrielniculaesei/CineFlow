@@ -8,14 +8,13 @@ API docs available at:
     http://localhost:8000/docs
 
 LLM Options:
-    1. Local (Ollama): Set LLM_PROVIDER=ollama
-    2. Cloud (Hugging Face): Set LLM_PROVIDER=huggingface + HF_API_TOKEN
-    3. Cloud (OpenAI): Set LLM_PROVIDER=openai + OPENAI_API_KEY
-    4. Cloud (Replicate): Set LLM_PROVIDER=replicate + REPLICATE_API_TOKEN
+    1. Cloud (Hugging Face): Set LLM_PROVIDER=huggingface + HF_API_TOKEN (recommended)
+    2. Cloud (OpenAI): Set LLM_PROVIDER=openai + OPENAI_API_KEY
+    3. Cloud (Replicate): Set LLM_PROVIDER=replicate + REPLICATE_API_TOKEN
 
 Environment variables:
-    LLM_PROVIDER - huggingface, replicate, openai, or ollama (default: auto-detect)
-    LLM_MODEL - Model name/ID
+    LLM_PROVIDER - huggingface (default), replicate, or openai
+    LLM_MODEL - Model name/ID (e.g., your-username/your-fine-tuned-model)
     HF_API_TOKEN - Hugging Face token (for huggingface provider)
 """
 
@@ -57,19 +56,13 @@ def setup_llm():
         elif os.getenv("REPLICATE_API_TOKEN"):
             provider = "replicate"
         else:
-            provider = "ollama"
+            provider = "huggingface"  # Default to Hugging Face
     
     print(f"LLM Provider: {provider}")
     
-    if provider == "ollama":
-        from llm_service import OllamaLLM, MovieChatbot
-        model = os.getenv("LLM_MODEL", "llama3.2:3b")
-        llm = OllamaLLM(model=model)
-        chatbot = MovieChatbot(llm)
-    else:
-        from cloud_llm_service import create_llm, CloudMovieChatbot
-        llm = create_llm(provider=provider)
-        chatbot = CloudMovieChatbot(llm)
+    from cloud_llm_service import create_llm, CloudMovieChatbot
+    llm = create_llm(provider=provider)
+    chatbot = CloudMovieChatbot(llm)
     
     return provider
 
@@ -85,10 +78,7 @@ async def lifespan(app: FastAPI):
     if llm_available:
         print(f"LLM service ready ({provider}: {llm.model})")
     else:
-        if provider == "ollama":
-            print("Ollama LLM not available (install: https://ollama.ai)")
-        else:
-            print(f"{provider} LLM not available (check API token)")
+        print(f"{provider} LLM not available (check API token)")
     
     yield
 
@@ -119,7 +109,7 @@ async def health_check():
         elif os.getenv("OPENAI_API_KEY"):
             provider = "openai"
         else:
-            provider = "ollama"
+            provider = "huggingface"
     
     return {
         "status": "healthy",
@@ -156,7 +146,7 @@ async def chat(request: ChatRequest):
     if not llm.is_available:
         raise HTTPException(
             status_code=503,
-            detail="LLM service not available. Install Ollama and run: ollama pull " + llm.model,
+            detail="LLM service not available. Check your HF_API_TOKEN is set correctly.",
         )
 
     try:

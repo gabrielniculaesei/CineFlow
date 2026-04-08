@@ -6,17 +6,20 @@ Production deployment options for the CineFlow backend.
 
 ```bash
 cd ml-api
+
+# Create virtual environment
 python3 -m venv venv
 source venv/bin/activate
+
+# Install dependencies
 pip install -r requirements.txt
+
+# Set up environment variables
+cp .env.example .env
+# Edit .env and add your HF_API_TOKEN
+
+# Start the server
 uvicorn main:app --reload --port 8000
-```
-
-For LLM chat features, install Ollama:
-
-```bash
-brew install ollama
-ollama pull llama3.2:3b
 ```
 
 ## Production Options
@@ -53,12 +56,12 @@ CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
 
 ```bash
 docker build -t cineflow-api .
-docker run -p 8000:8000 cineflow-api
+docker run -p 8000:8000 -e HF_API_TOKEN=your_token cineflow-api
 ```
 
 ### AWS EC2 / VPS
 
-1. Launch instance (t3.medium or larger for Ollama)
+1. Launch instance (t3.micro is sufficient for cloud LLM)
 2. Install dependencies
 3. Use systemd or PM2 to keep the server running
 4. Set up nginx as reverse proxy
@@ -173,12 +176,13 @@ server {
 }
 ```
 
-## LLM Models
+## LLM Models (Hugging Face)
 
-| Model | Size | Speed | Quality |
-|-------|------|-------|---------|
-| llama3.2:3b | 2GB | Fast | Good for dev |
-| mistral | 4GB | Medium | Balanced |
-| llama3:8b | 4.7GB | Slow | High quality |
+| Model | Quality | Speed | Notes |
+|-------|---------|-------|-------|
+| microsoft/Phi-3-mini-4k-instruct | Good | Medium | Recommended default |
+| google/gemma-2b-it | Decent | Fast | Fastest option |
+| mistralai/Mistral-7B-Instruct-v0.2 | Best | Slow | High quality |
+| your-username/your-fine-tuned-model | Custom | Varies | Your trained model |
 
-For cloud deployment without Ollama, use Hugging Face. See CLOUD_DEPLOYMENT.md.
+For fine-tuned models, see `finetune/` folder for training scripts.

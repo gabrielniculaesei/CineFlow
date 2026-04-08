@@ -2,7 +2,7 @@ import SwiftUI
 
 struct ChatView: View {
     @Environment(\.dismiss) private var dismiss
-    @State private var messages: [OllamaService.ChatMessage] = []
+    @State private var messages: [ChatService.ChatMessage] = []
     @State private var inputText = ""
     @State private var isLoading = false
     @FocusState private var isInputFocused: Bool
@@ -227,40 +227,38 @@ struct ChatView: View {
         let userText = text.trimmingCharacters(in: .whitespaces)
         guard !userText.isEmpty else { return }
         
-        let userMessage = OllamaService.ChatMessage(role: .user, content: userText)
+        let userMessage = ChatService.ChatMessage(role: .user, content: userText)
         messages.append(userMessage)
         inputText = ""
         isLoading = true
         
         Task {
             do {
-                let response = try await OllamaService.shared.sendMessage(
+                let response = try await ChatService.shared.sendMessage(
                     userMessage: userText,
                     history: Array(messages.dropLast())
                 )
                 await MainActor.run {
-                    let botMessage = OllamaService.ChatMessage(role: .assistant, content: response)
+                    let botMessage = ChatService.ChatMessage(role: .assistant, content: response)
                     messages.append(botMessage)
                     isLoading = false
                 }
-            } catch let error as OllamaError {
+            } catch let error as ChatError {
                 await MainActor.run {
                     let errorText: String
                     switch error {
                     case .serviceUnavailable:
-                        errorText = "Can't reach Ollama - make sure it's running on your Mac (http://localhost:11434)."
-                    case .modelNotFound:
-                        errorText = "The model '\(APIConfig.ollamaModel)' wasn't found. Run 'ollama pull \(APIConfig.ollamaModel)' in Terminal first."
+                        errorText = "Can't reach the chat service. Make sure the backend is running at \(APIConfig.mlAPIBaseURL)."
                     default:
                         errorText = "Something went wrong: \(error.localizedDescription). Please try again."
                     }
-                    messages.append(OllamaService.ChatMessage(role: .assistant, content: errorText))
+                    messages.append(ChatService.ChatMessage(role: .assistant, content: errorText))
                     isLoading = false
                 }
             } catch {
                 await MainActor.run {
-                    let errorText = "Connection error - make sure Ollama is running locally and try again."
-                    messages.append(OllamaService.ChatMessage(role: .assistant, content: errorText))
+                    let errorText = "Connection error - make sure the backend server is running and try again."
+                    messages.append(ChatService.ChatMessage(role: .assistant, content: errorText))
                     isLoading = false
                 }
             }

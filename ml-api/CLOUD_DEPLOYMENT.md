@@ -37,7 +37,7 @@ Total cost: Free with free tiers, or about $7-15/month for production.
 7. Start command: `uvicorn main:app --host 0.0.0.0 --port $PORT`
 8. Add environment variables:
    - LLM_PROVIDER = huggingface
-   - LLM_MODEL = microsoft/Phi-3-mini-4k-instruct
+   - LLM_MODEL = gabrielniculaesei/cinebot-movie-expert
    - HF_API_TOKEN = your token from step 1
 
 Your API will be at something like https://cineflow-api.onrender.com
@@ -59,9 +59,9 @@ Same process but at railway.app. Create project, deploy from GitHub, add environ
 ```bash
 curl https://your-app.onrender.com/health
 
-curl -X POST https://your-app.onrender.com/recommend \
+curl -X POST https://your-app.onrender.com/chat \
   -H "Content-Type: application/json" \
-  -d '{"movie_id": 27205, "limit": 5}'
+  -d '{"message": "What are some good sci-fi movies?"}'
 ```
 
 First request may be slow (30s) due to cold starts on free tier.
@@ -70,9 +70,10 @@ First request may be slow (30s) due to cold starts on free tier.
 
 | Model | Quality | Speed | Notes |
 |-------|---------|-------|-------|
-| microsoft/Phi-3-mini-4k-instruct | Good | Medium | Recommended |
+| gabrielniculaesei/cinebot-movie-expert | Best | Medium | Your fine-tuned model |
+| microsoft/Phi-3-mini-4k-instruct | Good | Medium | Default fallback |
 | google/gemma-2b-it | Decent | Fast | Fastest option |
-| mistralai/Mistral-7B-Instruct-v0.2 | Best | Slow | High quality |
+| mistralai/Mistral-7B-Instruct-v0.2 | High | Slow | High quality |
 
 To change models, update the LLM_MODEL environment variable.
 
