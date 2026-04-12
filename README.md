@@ -35,6 +35,8 @@ There is also a built-in conversational assistant called CineBot. It is backed b
 
 The system is split into two independently deployable parts: the iOS client and a lightweight Python API server. Each talks to external services as needed, and the two communicate over HTTP.
 
+![System Design](screenshots/design.svg)
+
 ```
                              +------------------+
                              |    TMDB API      |

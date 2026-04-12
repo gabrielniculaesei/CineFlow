@@ -58,3 +58,5 @@ ml-api/models/
 
 # Jupyter notebooks checkpoints
 .ipynb_checkpoints/
+
+ml-api/server.log
