@@ -5,6 +5,7 @@ struct ChatView: View {
     @State private var messages: [ChatService.ChatMessage] = []
     @State private var inputText = ""
     @State private var isLoading = false
+    @State private var statusText: String?
     @FocusState private var isInputFocused: Bool
     
     var body: some View {
@@ -139,6 +140,7 @@ struct ChatView: View {
                             .font(.system(size: 11, weight: .semibold))
                             .foregroundColor(AppTheme.accent)
                     }
+
                 }
                 
                 Text(message.content)
@@ -161,18 +163,26 @@ struct ChatView: View {
     // MARK: - Typing Indicator
     private var typingIndicator: some View {
         HStack {
-            HStack(spacing: 6) {
-                ForEach(0..<3, id: \.self) { index in
-                    Circle()
-                        .fill(AppTheme.textTertiary)
-                        .frame(width: 7, height: 7)
-                        .opacity(0.6)
-                        .animation(
-                            .easeInOut(duration: 0.6)
-                            .repeatForever(autoreverses: true)
-                            .delay(Double(index) * 0.2),
-                            value: isLoading
-                        )
+            VStack(alignment: .leading, spacing: 8) {
+                HStack(spacing: 6) {
+                    ForEach(0..<3, id: \.self) { index in
+                        Circle()
+                            .fill(AppTheme.textTertiary)
+                            .frame(width: 7, height: 7)
+                            .opacity(0.6)
+                            .animation(
+                                .easeInOut(duration: 0.6)
+                                .repeatForever(autoreverses: true)
+                                .delay(Double(index) * 0.2),
+                                value: isLoading
+                            )
+                    }
+                }
+
+                if let statusText {
+                    Text(statusText)
+                        .font(.system(size: 12, weight: .medium))
+                        .foregroundColor(AppTheme.textSecondary)
                 }
             }
             .padding(16)
@@ -231,9 +241,28 @@ struct ChatView: View {
         messages.append(userMessage)
         inputText = ""
         isLoading = true
+        statusText = nil
         
         Task {
             do {
+                await MainActor.run {
+                    statusText = "Waking up server, please wait..."
+                }
+                let available = await ChatService.shared.waitUntilAvailable()
+                if !available {
+                    await MainActor.run {
+                        let errorText = "Server is still waking up. Please wait a few seconds and try again."
+                        messages.append(ChatService.ChatMessage(role: .assistant, content: errorText))
+                        isLoading = false
+                        statusText = nil
+                    }
+                    return
+                }
+
+                await MainActor.run {
+                    statusText = "Server is up. Generating response..."
+                }
+
                 let response = try await ChatService.shared.sendMessage(
                     userMessage: userText,
                     history: Array(messages.dropLast())
@@ -242,24 +271,27 @@ struct ChatView: View {
                     let botMessage = ChatService.ChatMessage(role: .assistant, content: response)
                     messages.append(botMessage)
                     isLoading = false
+                    statusText = nil
                 }
             } catch let error as ChatError {
                 await MainActor.run {
                     let errorText: String
                     switch error {
                     case .serviceUnavailable:
-                        errorText = "Can't reach the chat service. Make sure the backend is running at \(APIConfig.mlAPIBaseURL)."
+                        errorText = "The chat server is waking up on Render free tier. Please wait a bit and try again."
                     default:
                         errorText = "Something went wrong: \(error.localizedDescription). Please try again."
                     }
                     messages.append(ChatService.ChatMessage(role: .assistant, content: errorText))
                     isLoading = false
+                    statusText = nil
                 }
             } catch {
                 await MainActor.run {
-                    let errorText = "Connection error - make sure the backend server is running and try again."
+                    let errorText = "Connection error. The server may still be waking up. Please try again shortly."
                     messages.append(ChatService.ChatMessage(role: .assistant, content: errorText))
                     isLoading = false
+                    statusText = nil
                 }
             }
         }

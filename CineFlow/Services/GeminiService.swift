@@ -57,6 +57,35 @@ class ChatService {
         
         return content.trimmingCharacters(in: .whitespacesAndNewlines)
     }
+
+    func waitUntilAvailable(maxChecks: Int = 8, intervalSeconds: UInt64 = 4) async -> Bool {
+        guard maxChecks > 0 else { return false }
+
+        for check in 0..<maxChecks {
+            if await isAvailable() {
+                return true
+            }
+
+            if check < maxChecks - 1 {
+                try? await Task.sleep(nanoseconds: intervalSeconds * 1_000_000_000)
+            }
+        }
+
+        return false
+    }
+
+    private func isAvailable() async -> Bool {
+        guard let url = URL(string: "\(APIConfig.mlAPIBaseURL)/health") else { return false }
+        var request = URLRequest(url: url)
+        request.timeoutInterval = 4
+
+        do {
+            let (_, response) = try await session.data(for: request)
+            return (response as? HTTPURLResponse)?.statusCode == 200
+        } catch {
+            return false
+        }
+    }
 }
 
 enum ChatError: LocalizedError {

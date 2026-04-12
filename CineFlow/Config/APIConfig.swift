@@ -12,9 +12,8 @@ enum APIConfig {
     }
     
     // MARK: - ML API Configuration (Backend)
-    // For local development: http://localhost:8000
-    // For production: https://your-app.onrender.com
-    static let mlAPIBaseURL = "http://localhost:8000"
+    // Render deployment URL
+    static let mlAPIBaseURL = "https://cineflow-gzxe.onrender.com"
     
     // Image sizes
     enum PosterSize: String {
