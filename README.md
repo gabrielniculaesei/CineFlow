@@ -8,12 +8,28 @@ Movies the user has watched can be rated and marked as liked or loved. A profile
 
 There is also a built-in conversational assistant called CineBot. It is backed by a cloud-hosted large language model (currently served through Hugging Face Inference, though any OpenAI-compatible provider works). Users can ask CineBot for recommendations, compare movies, or just talk about film.
 
-<p align="center">
-  <img src="screenshots/home.png" width="230" />
-  <img src="screenshots/what-to-watch.png" width="230" />
-  <img src="screenshots/profile.png" width="230" />
-  <img src="screenshots/cinebot.png" width="230" />
-</p>
+<table align="center">
+  <tr>
+    <td align="center">
+      <img src="screenshots/home.png" width="220" alt="Home screen" /><br />
+      <sub><b>Home</b></sub>
+    </td>
+    <td align="center">
+      <img src="screenshots/what-to-watch.png" width="220" alt="What to Watch screen" /><br />
+      <sub><b>What to Watch</b></sub>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <img src="screenshots/profile.png" width="220" alt="Profile screen" /><br />
+      <sub><b>Profile</b></sub>
+    </td>
+    <td align="center">
+      <img src="screenshots/cinebot.png" width="220" alt="CineBot screen" /><br />
+      <sub><b>CineBot</b></sub>
+    </td>
+  </tr>
+</table>
 
 ---
 
@@ -36,33 +52,6 @@ There is also a built-in conversational assistant called CineBot. It is backed b
 The system is split into two independently deployable parts: the iOS client and a lightweight Python API server. Each talks to external services as needed, and the two communicate over HTTP.
 
 ![System Design](screenshots/design.svg)
-
-```
-                             +------------------+
-                             |    TMDB API      |
-                             | (movie metadata, |
-                             |  posters, etc.)  |
-                             +--------+---------+
-                                      |
-                                      | HTTPS (direct)
-                                      |
-+-------------------+         +-------+--------+         +-------------------+
-|                   |  HTTP   |                |  HTTPS  |                   |
-|   iOS Client      +-------->+  FastAPI Server +-------->+  LLM Provider     |
-|   (SwiftUI)       |         |  (ml-api)      |         |  (Hugging Face /  |
-|                   +<--------+                +<--------+   OpenAI / any    |
-|                   |         |                |         |   ) |
-+-------------------+         +-------+--------+         +-------------------+
-                                      |
-                                      | internal
-                                      |
-                              +-------+--------+
-                              |  Recommender   |
-                              |  Engine        |
-                              |  (ML model or  |
-                              |   external API)|
-                              +----------------+
-```
 
 **How data flows through the system:**
 
