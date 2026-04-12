@@ -109,7 +109,6 @@ CineFlow/
     |-- start_backend.sh             # One-command server launcher
     |-- render.yaml                  # Render.com deployment config
     |-- Procfile                     # Process definition for cloud platforms
-    |-- .env.example                 # Template for environment variables
     +-- finetune/                    # Scripts to fine-tune a CineBot LLM
         |-- finetune_colab.ipynb     # Google Colab training notebook
         |-- generate_training_data.py
@@ -171,12 +170,7 @@ The `requirements.txt` installs the following:
 
 ### Environment configuration
 
-```bash
-# 5. Copy the example environment file
-cp .env.example .env
-```
-
-Open `.env` in any text editor and fill in the required values:
+Create a `.env` file in `ml-api/` and fill in the required values:
 
 ```
 LLM_PROVIDER=huggingface

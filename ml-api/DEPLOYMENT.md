@@ -15,8 +15,7 @@ source venv/bin/activate
 pip install -r requirements.txt
 
 # Set up environment variables
-cp .env.example .env
-# Edit .env and add your HF_API_TOKEN
+# Create .env and add your HF_API_TOKEN
 
 # Start the server
 uvicorn main:app --reload --port 8000
@@ -30,7 +29,7 @@ uvicorn main:app --reload --port 8000
 2. Set root directory to ml-api
 3. Build: `pip install -r requirements.txt`
 4. Start: `uvicorn main:app --host 0.0.0.0 --port $PORT`
-5. Add environment variables (see .env.example)
+5. Add environment variables in your platform dashboard (LLM_PROVIDER, LLM_MODEL, HF_API_TOKEN)
 
 Cost: Free tier available, $7/month for always-on
 
